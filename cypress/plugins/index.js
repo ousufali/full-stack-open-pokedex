@@ -1,3 +1,4 @@
+/*eslint no-undef:0  no-unused-vars:0*/
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
