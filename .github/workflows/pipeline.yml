@@ -31,7 +31,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemonpart11"
           heroku_email: "yousaf.syed5@gmail.com"
-          branch: "master"
           dontuseforce: 1
 
         
