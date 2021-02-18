@@ -32,5 +32,6 @@ jobs:
           heroku_app_name: "mypokemon11"
           heroku_email: "yousaf.syed5@gmail.com"
           dontuseforce: true
+          healthcheck: "https://mypokemon11.herokuapp.com/health"
 
         
