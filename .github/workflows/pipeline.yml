@@ -51,6 +51,7 @@ jobs:
   #       with:
   #         fetch-depth: '0'
   #     - name: Bumping version and push tag
+  #    # uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
   #       uses: anothrNick/github-tag-action@1.33.0
   #       env:
   #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -60,18 +61,15 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: gihub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
+
+      - name: 'commit messages for #skip'
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
+          COMMIT_MESSAGES_STRING: ${{ join(env.COMMIT_MESSAGES) }}
+        run: echo "$COMMIT_MESSAGES_STRING"
+        if: ${{ contain(env.COMMIT_MESSAGES_STRING , '#skip')}}
+        run: echo 'skip exist in commit'
+        
         
 
         
