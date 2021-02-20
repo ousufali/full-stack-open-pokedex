@@ -69,7 +69,7 @@ jobs:
         run: |
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_MESSAGES_STRING"
-          cat env.COMMIT_MESSAGES
+        
       - name: Checking  
         if: ${{ contains(env.COMMIT_MESSAGES_STRING , '#skip')}}
         run:
