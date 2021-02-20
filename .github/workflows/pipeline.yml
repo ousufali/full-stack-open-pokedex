@@ -71,10 +71,8 @@ jobs:
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_MESSAGES_STRING"
           echo "$ISSKIP"
-        
-      - name: Checking  
         if: ${{ env.ISSKIP == true }}
-        run:
+      
           echo 'skip exist in commit'
         
         
