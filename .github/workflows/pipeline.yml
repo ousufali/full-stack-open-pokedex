@@ -67,6 +67,7 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
           COMMIT_MESSAGES_STRING: ${{ join(env.COMMIT_MESSAGES) }}
         run: 
+          echo "$COMMIT_MESSAGES"
           echo "$COMMIT_MESSAGES_STRING"
         if: ${{ contains(env.COMMIT_MESSAGES_STRING , '#skip')}}
           echo 'skip exist in commit'
