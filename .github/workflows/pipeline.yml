@@ -71,7 +71,7 @@ jobs:
           echo "$COMMIT_MESSAGES_STRING"
         
       - name: Checking  
-        if: ${{ contains('env.COMMIT_MESSAGES_STRING' , '#skip')}}
+        if: ${{ contains('env.COMMIT_MESSAGES_STRING' , '#skip') == true }}
         run:
           echo 'skip exist in commit'
         
