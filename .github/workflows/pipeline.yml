@@ -67,6 +67,7 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
           COMMIT_MESSAGES_STRING: ${{ join(github.event.commits.*.message) }}
           ISSKIP: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        run: echo "variabled set"
       - name: echoing env's
         run: |
           echo "$COMMIT_MESSAGES"
