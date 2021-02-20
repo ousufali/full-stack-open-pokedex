@@ -72,7 +72,7 @@ jobs:
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_MESSAGES_STRING"
           echo "$ISSKIP"
-        if: ${{env.ISSKIP}}
+        if: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
           echo 'skip exist in commit'
           echo date
         
