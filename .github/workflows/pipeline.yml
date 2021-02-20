@@ -65,10 +65,11 @@ jobs:
       - name: 'commit messages for #skip'
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          COMMIT_MESSAGES_STRING: join(toJson(github.event.commits.*.message), ',')
+          COMMIT_MESSAGES_STRING: ${{ join(env.COMMIT_MESSAGES  , '.') }}
         run: |
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_MESSAGES_STRING"
+          cat env.COMMIT_MESSAGES
       - name: Checking  
         if: ${{ contains(env.COMMIT_MESSAGES_STRING , '#skip')}}
         run:
