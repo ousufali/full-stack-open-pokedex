@@ -58,6 +58,7 @@ jobs:
   #         WITH_V: true
   #         DEFAULT_BUMP: 'patch'
   a_test_job:
+    if: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -72,10 +73,7 @@ jobs:
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_MESSAGES_STRING"
           echo "$ISSKIP"
-        if: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
-          echo 'skip exist in commit'
-          echo date
-        
+
         
 
         
