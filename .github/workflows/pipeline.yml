@@ -65,7 +65,7 @@ jobs:
       - name: 'commit messages for #skip'
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          COMMIT_MESSAGES_STRING: ${{ join(env.COMMIT_MESSAGES) }}
+          COMMIT_MESSAGES_STRING: ${{ join(toJson(github.event.commits.*.message)) }}
         run: |
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_MESSAGES_STRING"
