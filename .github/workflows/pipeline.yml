@@ -73,6 +73,7 @@ jobs:
           echo "$COMMIT_MESSAGES_STRING"
           echo "$ISSKIP"
       - name: checking isskip==true
+        run: |
         if: ${{env.ISSKIP == true}}
           echo 'skip exist in commit'
           echo date
