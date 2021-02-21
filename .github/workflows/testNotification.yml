@@ -15,6 +15,7 @@ jobs:
       - name: checking job object
         env:
           JOB:  ${{toJson(job)}}
+        run: echo date
 
       - uses: 8398a7/action-slack@v3
         with:
