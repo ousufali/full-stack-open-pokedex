@@ -7,8 +7,7 @@ on:
     branches: [master]
     types:  [opened , synchronize]
 
-
-          
+jobs:
   notification:
     runs-on: ubuntu-18.04
     steps:
