@@ -1,79 +1,79 @@
-name: Deployment pipeline
-on: 
-  push:
-    branches: 
-      - master
-  pull_request:
-    branches: [master]
-    types:  [opened , synchronize]
+# name: Deployment pipeline
+# on: 
+#   push:
+#     branches: 
+#       - master
+#   pull_request:
+#     branches: [master]
+#     types:  [opened , synchronize]
 
 
-jobs:      
-  simple_deployment_pipline:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+# jobs:      
+#   simple_deployment_pipline:
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: '12.x'
+#       - name: npm install
+#         run: npm install
+#       - name: lint
+#         run: npm run eslint
+#       - name: build
+#         run: npm run build
+#       - name: test
+#         run: npm run test
+#       - name: e2e tests
+#         uses: cypress-io/github-action@v2
+#         with:
+#           command: npm run test:e2e
+#           start: npm run start-prod
+#           wait-on: http://localhost:5000
 
-      - name: deploying to heroku
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message) , '#skip') }}
-        uses: akhileshns/heroku-deploy@v3.11.10
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "mypokemon11"
-          heroku_email: "yousaf.syed5@gmail.com"
-          healthcheck: "https://mypokemon11.herokuapp.com/health"
-          checkstring: "ok"
-          delay: 5
-          rollbackonhealthcheckfailed: true
+#       - name: deploying to heroku
+#         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message) , '#skip') }}
+#         uses: akhileshns/heroku-deploy@v3.11.10
+#         with:
+#           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#           heroku_app_name: "mypokemon11"
+#           heroku_email: "yousaf.syed5@gmail.com"
+#           healthcheck: "https://mypokemon11.herokuapp.com/health"
+#           checkstring: "ok"
+#           delay: 5
+#           rollbackonhealthcheckfailed: true
   
-  bumping_verion_pipeline:
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message) , '#skip')}}
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
-      - name: Bumping version and push tag
-        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          WITH_V: true
-          DEFAULT_BUMP: 'patch'
+#   bumping_verion_pipeline:
+#     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message) , '#skip')}}
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - uses: actions/checkout@v2
+#         with:
+#           fetch-depth: '0'
+#       - name: Bumping version and push tag
+#         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+#         env:
+#           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#           WITH_V: true
+#           DEFAULT_BUMP: 'patch'
 
 
-  a_test_job:
-    if: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
+#   a_test_job:
+#     if: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - name: 'commit messages for #skip'
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          COMMIT_MESSAGES_STRING: ${{ join(github.event.commits.*.message) }}
-          ISSKIP: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
-        run: | 
-          echo "variabled set"
-          echo "$COMMIT_MESSAGES"
-          echo "$COMMIT_MESSAGES_STRING"
-          echo "$ISSKIP"
+#       - name: 'commit messages for #skip'
+#         env:
+#           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+#           COMMIT_MESSAGES_STRING: ${{ join(github.event.commits.*.message) }}
+#           ISSKIP: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
+#         run: | 
+#           echo "variabled set"
+#           echo "$COMMIT_MESSAGES"
+#           echo "$COMMIT_MESSAGES_STRING"
+#           echo "$ISSKIP"
 
 
         
