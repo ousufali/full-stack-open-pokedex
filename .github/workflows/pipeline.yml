@@ -47,7 +47,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          field: repo, message, author, took, commit
+          fields: repo, message, author, took, commit
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL}}
       
@@ -65,7 +65,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: custom
-          field:  commit, author, took
+          fields:  commit, author, took
           custom_payload: |
             {
               attachments: [{
