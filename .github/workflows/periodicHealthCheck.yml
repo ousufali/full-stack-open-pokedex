@@ -2,7 +2,7 @@ name: periodic health check
 
 on:
   schedule:
-    - corn: '39 0 1-31 1-12 0-6'
+    - corn: '45 0 * * *'
 
 jobs:
   health-check:
