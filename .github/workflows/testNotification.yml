@@ -10,18 +10,17 @@ on:
 
           
   notification:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-18.04s
     steps:
       - uses: actions/checkout@v2
       - name: consoling ...
-        run: |
-          echo ${{job}}
-          cat  ${{job.status}}
+        env:
+          JOB:  ${{toJson(job)}}
 
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{job.status}}
-          fields: repo, message
+          fields: all
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL}}
         if: always()
