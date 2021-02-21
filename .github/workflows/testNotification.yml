@@ -12,10 +12,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: consoling ...
-        run: |
-          echo ${{job}}
-          cat  ${{job.status}}
+      - name: checking job object
+        env:
+          JOB:  ${{toJson(job)}}
 
       - uses: 8398a7/action-slack@v3
         with:
