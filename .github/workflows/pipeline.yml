@@ -70,7 +70,7 @@ jobs:
             {
               attachments: [{
                 color: '${{ job.success}}' === 'success' ? 'good' : '${{ job.success }}' === 'failure' ? 'danger': 'warning' ,
-                text: `a new version is deployed to https://mypokemon11.herokuapp.com/ (${{process.env.AS_COMMIT}})  by ${{ process.env.AS_AUTHOR}} build took ${{ process.env.AS_TOOK }} `,
+                text: `a new version is deployed to https://mypokemon11.herokuapp.com/ ( ${process.env.AS_COMMIT} )  by ${ process.env.AS_AUTHOR} build took ${ process.env.AS_TOOK } `,
               }]
             }
         env:
