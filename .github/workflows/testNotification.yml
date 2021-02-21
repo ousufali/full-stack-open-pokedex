@@ -9,7 +9,7 @@ on:
 
 jobs:
   notification:
-    runs-on: ubuntu-18.04s
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - name: checking job object
