@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: deploying to heroku
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message) , '#skip') }}
         uses: akhileshns/heroku-deploy@v3.11.10
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -44,7 +44,7 @@ jobs:
           rollbackonhealthcheckfailed: true
   
   bumping_verion_pipeline:
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')}}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message) , '#skip')}}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -74,6 +74,7 @@ jobs:
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_MESSAGES_STRING"
           echo "$ISSKIP"
+
 
         
 
